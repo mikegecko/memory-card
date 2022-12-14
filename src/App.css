@@ -1,17 +1,14 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: whitesmoke;
+  background-image: url(./images/genshin-bg-liyue.jpeg);
+  background-size: cover;
+  align-items: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #282c34;
@@ -28,11 +25,33 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.font-face-gen{
+  font-family: "Genshin";
+}
+
+.header{
+  display: flex;
+  height: 3rem;
+  width: 90%;
+  padding: 1rem;
+  margin: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.frosted{
+  background: rgba(255, 255, 255, 0.29);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.title{
+  color: whitesmoke;
+}
+
+.score{
+  color: whitesmoke;
+  padding-right: 3rem;
 }
