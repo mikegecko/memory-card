@@ -4,13 +4,17 @@ import Card from "./Card";
 function Game (props) {
 
     return (
-        <div>
+        <div className="container">
             {props.cards.map((el,index) => {
-                return(
-                    <div key={index}>
-                        <Card card={el} />
-                    </div>
-                )})
+                if(index < 12){
+                    return(
+                        <div key={index} className="card-container">
+                            <Card card={el} />
+                        </div>
+                    )
+                }
+                return;
+                })
             }
         </div>
     );
