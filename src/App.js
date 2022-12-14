@@ -31,6 +31,7 @@ export const images = importAll(
 );
 function App() {
   const [cards, setCards] = useState([]);
+  const [displayCards, setDisplayCards] = useState([]);
   const [score, setScore] = useState(0);
   const [best, setBest] = useState(0);
 
@@ -71,7 +72,8 @@ function App() {
     //ComponentDidMount - runs once on creation
     //If you leave out the array, it will run on every update
     //Add a return statement for componentWillUnmount
-    setCards(createCards());
+    setCards(shuffle(createCards()));
+    
   }, []);
 
   useEffect(() => {
@@ -81,7 +83,7 @@ function App() {
   return (
     <div className="App">
       <Scoreboard score={score} best={best} />
-      <Game cards={cards} />
+      <Game cards={cards} displayCards={displayCards}/>
     </div>
   );
 }
