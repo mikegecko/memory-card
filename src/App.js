@@ -2,6 +2,7 @@ import "./App.css";
 import Scoreboard from "./components/Scoreboard";
 import Game from "./components/Game";
 import { useEffect, useState } from "react";
+import { click } from "@testing-library/user-event/dist/click";
 
 /* 
   -------TODO------
@@ -31,9 +32,10 @@ export const images = importAll(
 );
 function App() {
   const [cards, setCards] = useState([]);
-  const [displayCards, setDisplayCards] = useState([]);
   const [score, setScore] = useState(0);
   const [best, setBest] = useState(0);
+  const [loss, setLoss] = useState(0);
+  const [death ,setDeath] = useState(false);
 
   const createCards = () => {
     let cardArray = [];
@@ -64,26 +66,67 @@ function App() {
         array[currentIndex],
       ];
     }
-    console.log(array);
     return array;
   };
 
+  const clickHandler = (e) => {
+    let id = parseInt(e.currentTarget.id);
+    playRound(id);
+  }
+  const playRound = (id) => {
+    let clickedItem = cards.filter(el => el.id === id);
+    if(!clickedItem[0].clicked){
+      clickedItem[0].clicked = true;
+      setCards([...cards], clickedItem[0]);
+      setScore(score+1);
+      setCards(shuffle(cards));
+    }
+    else{
+      console.log('You lose');
+      setLoss(loss+1);
+      resetGame();
+    }
+    console.log(clickedItem[0]);
+  }
+  const resetGame = () => {
+    if(score > best){
+      setBest(score);
+    }
+    setScore(0);
+    setCards(shuffle(createCards()));
+
+  }
+
+  const deathScreen = () => {
+    let className = 'do-damage';
+    return(
+      <div className={className}></div>
+    );
+  }
   useEffect(() => {
     //ComponentDidMount - runs once on creation
     //If you leave out the array, it will run on every update
     //Add a return statement for componentWillUnmount
     setCards(shuffle(createCards()));
-    
+    console.log('Mount');
   }, []);
 
   useEffect(() => {
+    console.log('update');
+  })
+
+  useEffect(() => {
     //ComponentDidUpdate - runs whenever the dependecy (cards) changes
-  }, [cards]);
+    console.log('lost');
+    setDeath(true);
+    const timer = setTimeout(() => setDeath(false), 400)
+  }, [loss]);
 
   return (
     <div className="App">
       <Scoreboard score={score} best={best} />
-      <Game cards={cards} displayCards={displayCards}/>
+      <Game cards={cards} clickHandler={clickHandler}/>
+      <div className={death ? 'do-damage' : null} id='doom-damage'></div>
     </div>
   );
 }
