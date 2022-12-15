@@ -83,8 +83,8 @@
   height: 110px;
   width: 110px;
 }
-#doom-damage {
-  background-color: red;
+#damage {
+  box-shadow: inset 0px 10px 100px 100px rgba(255,0,0,1);;
   position: fixed;
   top: 0;
   left: 0;
@@ -94,7 +94,7 @@
   pointer-events: none;
 }
 .do-damage {
-  background-color: red;
+  box-shadow: inset 0px 10px 100px 100px rgba(255,0,0,1);;
   animation: 0.4s doom-damage forwards;
 }
 

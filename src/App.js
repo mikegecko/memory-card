@@ -82,11 +82,9 @@ function App() {
       setCards(shuffle(cards));
     }
     else{
-      console.log('You lose');
       setLoss(loss+1);
       resetGame();
     }
-    console.log(clickedItem[0]);
   }
   const resetGame = () => {
     if(score > best){
@@ -108,16 +106,13 @@ function App() {
     //If you leave out the array, it will run on every update
     //Add a return statement for componentWillUnmount
     setCards(shuffle(createCards()));
-    console.log('Mount');
   }, []);
 
   useEffect(() => {
-    console.log('update');
   })
 
   useEffect(() => {
     //ComponentDidUpdate - runs whenever the dependecy (cards) changes
-    console.log('lost');
     setDeath(true);
     const timer = setTimeout(() => setDeath(false), 400)
   }, [loss]);
@@ -126,7 +121,7 @@ function App() {
     <div className="App">
       <Scoreboard score={score} best={best} />
       <Game cards={cards} clickHandler={clickHandler}/>
-      <div className={death ? 'do-damage' : null} id='doom-damage'></div>
+      <div className={death ? 'do-damage' : null} id='damage'></div>
     </div>
   );
 }
