@@ -6,7 +6,7 @@ function Game(props) {
       {props.cards.map((el, index) => {
         if (index < 12) {
           return (
-            <div key={index} className="card-container">
+            <div id={el.id} key={index} className="card-container" onClick={(e) => {props.clickHandler(e)}} >
               <Card card={el} />
             </div>
           );
